@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const apiUrl = 'https://api.development.eventsheet.app/v1/events/public/sheet/0eabb2f4-3ced-4092-a9d1-7e04fc19d245'; // Your API endpoint
     const container = document.getElementById('eventsheet-embed-widget');
-
+    const sheetID = container.getAttribute('sheet-id')
+    const apiUrl = 'https://api.eventsheet.app/v1/events/public/sheet/' + sheetID;
+    
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
