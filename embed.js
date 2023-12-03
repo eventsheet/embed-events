@@ -1,7 +1,15 @@
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const container = document.getElementById('eventsheet-embed-widget');
     const sheetID = container.getAttribute('sheet-id')
     const apiUrl = 'https://api.eventsheet.app/v1/events/public/sheet/' + sheetID;
+
+    // Styles
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://eventsheet.github.io/embed-events/style.css';
+    document.head.appendChild(link);
     
     fetch(apiUrl)
         .then(response => response.json())
@@ -24,18 +32,59 @@ document.addEventListener("DOMContentLoaded", function () {
                 eventContainer.className = "event"
 
                 // Event Time Details - In user's timezone
-                const eventTimeDetails = document.createElement('div')
-                eventTimeDetails.className = "time"
+                const eventDateDetails = document.createElement('div')
+                eventDateDetails.className = "date"
+                eventContainer.appendChild(eventDateDetails)
+                
+                // Convert Seconds to date
                 const milliseconds = item.times.event_start_time.seconds * 1000;
                 const date = new Date(milliseconds);
-                eventTimeDetails.textContent = date.toLocaleString();
-                eventContainer.appendChild(eventTimeDetails)
+                const month = date.toLocaleString('en-us', { month: 'short' })
+                const day = date.getDate();
+                const year = date.getFullYear();
+                // Month
+                const eventMonth = document.createElement('div')
+                eventMonth.className = "month"
+                eventMonth.textContent = month
+                eventDateDetails.appendChild(eventMonth)
+                // Day
+                const eventDay = document.createElement('div')
+                eventDay.className = "day"
+                eventDay.textContent = day
+                eventDateDetails.appendChild(eventDay)
+                // Year
+                const eventYear = document.createElement('div')
+                eventYear.className = "year"
+                eventYear.textContent = year
+                eventDateDetails.appendChild(eventYear)
+
+                // Event Details
+                const eventGeneralDetails = document.createElement('div')
+                eventGeneralDetails.classList.add("location")
+
+                // Event Time
+                const eventTimeDetails = document.createElement('div')
+                eventTimeDetails.classList.add("time")
+                const weekday = date.toLocaleDateString('en-US', { weekday: 'long' })
+                const time = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: "numeric", timeZoneName: "shortGeneric" })
+                eventTimeDetails.textContent = weekday + " | " + time
+                eventGeneralDetails.appendChild(eventTimeDetails)
 
                 // Event Location Details
-                const eventLocationDetails = document.createElement('div')
-                eventLocationDetails.className = "location"
-                eventLocationDetails.textContent = item.location.venue_name + " - " + item.location.city_name + ", " + item.location.state_name
-                eventContainer.appendChild(eventLocationDetails)
+                const eventLocationDetails = document.createElement('a')
+                eventLocationDetails.href = "https://www.google.com/maps/place/?q=place_id:" + item.location.maps_place_id
+                eventLocationDetails.target = '_blank';
+                eventLocationDetails.classList.add("venue")
+                eventLocationDetails.textContent = item.location.venue_name
+                eventGeneralDetails.appendChild(eventLocationDetails)
+
+                const eventLocationCityState = document.createElement('div')
+                eventLocationCityState.classList.add("city", "state")
+                eventLocationCityState.textContent = item.location.city_name + ", " + item.location.state_name
+                eventGeneralDetails.appendChild(eventLocationCityState)
+
+
+                eventContainer.appendChild(eventGeneralDetails)
 
                 // Event Ticket Button
                 var ticketLink = document.createElement('a');
