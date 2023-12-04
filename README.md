@@ -1,6 +1,6 @@
-# embed-events
+# Eventsheet Event Embed Widget
 
-## Sample
+## Sample Embed
 
 ```html
 <!DOCTYPE html>
@@ -20,3 +20,7 @@
 </body>
 </html>
 ```
+
+## Testing
+
+Open `local.html` locally in your browser. This file uses local references to the `embed.js` file and the `style.css` file.
