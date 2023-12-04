@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const milliseconds = item.times.event_start_time.seconds * 1000;
                 const date = new Date(milliseconds);
                 const month = date.toLocaleString('en-us', { month: 'short' })
-                const day = date.getDate();
+                const day = date.toLocaleString('en-us', { day: '2-digit' })
                 const year = date.getFullYear();
                 // Month
                 const eventMonth = document.createElement('div')

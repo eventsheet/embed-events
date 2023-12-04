@@ -62,14 +62,14 @@
 #eventsheet-embed-widget .month,
 .day,
 .year {
-    font-family: 'Arial', sans-serif;
     text-align: center;
-    padding: 2px 0;
+    font-family: monospace;
 }
 
 #eventsheet-embed-widget .month {
     font-size: 1.2em;
     font-weight: 100;
+    text-transform: uppercase;
 }
 
 #eventsheet-embed-widget .day {
