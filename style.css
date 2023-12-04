@@ -37,3 +37,36 @@
     border-radius: 4px;
     cursor: pointer;
 }
+
+#eventsheet-embed-widget .event {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #dddddd;
+}
+
+#eventsheet-embed-widget .date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#eventsheet-embed-widget .month,
+.day,
+.year {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    padding: 2px 0;
+}
+
+#eventsheet-embed-widget .month {
+    font-size: 1.2em;
+    font-weight: 100;
+}
+
+#eventsheet-embed-widget .day {
+    font-size: 2em;
+    font-weight: bold;
+}
