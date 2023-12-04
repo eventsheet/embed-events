@@ -54,8 +54,8 @@
 }
 
 #eventsheet-embed-widget .month,
-.day,
-.year {
+#eventsheet-embed-widget .day,
+#eventsheet-embed-widget .year {
     font-family: 'Arial', sans-serif;
     text-align: center;
     padding: 2px 0;
