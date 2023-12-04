@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const container = document.getElementById('eventsheet-embed-widget');
     const sheetID = container.getAttribute('sheet-id')
@@ -20,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
             tourHeader.textContent = data["tour_name"]
             container.appendChild(tourHeader);
 
-            const artistHeader = this.createElement('h2')
+            const artistHeader = document.createElement('h2')
             artistHeader.textContent = data["artist_name"]
             container.appendChild(artistHeader);
 

@@ -1,12 +1,9 @@
 #eventsheet-embed-widget {
     font-family: 'Arial', sans-serif;
     color: #ffffff;
-    margin: 0;
+    margin: 20px 0 0 0;
     padding: 20px;
     background: #1e1e1e;
-    border-radius: 4px;
-    padding: 20px;
-    margin-top: 20px;
     border-radius: 0.5em;
 }
 
@@ -20,9 +17,13 @@
     width: 100%;
 }
 
-#eventsheet-embed-widget .location .venue {
-    text-decoration: none;
+#eventsheet-embed-widget .location .venue,
+#eventsheet-embed-widget .tickets {
     color: #ffffff;
+    text-decoration: none;
+}
+
+#eventsheet-embed-widget .location .venue {
     font-size: 1.5em;
     font-weight: bold;
 }
@@ -30,51 +31,9 @@
 #eventsheet-embed-widget .tickets {
     width: 10em;
     background-color: #4351f2;
-    color: white;
     border: none;
     padding: 10px 15px;
     text-transform: uppercase;
     border-radius: 4px;
     cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-}
-
-#eventsheet-embed-widget .tickets:hover {
-    background-color: #8e50de;
-}
-
-#eventsheet-embed-widget .event {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #dddddd;
-}
-
-#eventsheet-embed-widget .date {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Center the items horizontally */
-    justify-content: center;
-    /* Center the items vertically if there is extra space */
-}
-
-#eventsheet-embed-widget .month,
-.day,
-.year {
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-    padding: 2px 0;
-}
-
-#eventsheet-embed-widget .month {
-    font-size: 1.2em;
-    font-weight: 100;
-}
-
-#eventsheet-embed-widget .day {
-    font-size: 2em;
-    font-weight: bold;
 }
