@@ -1,31 +1,44 @@
 document.addEventListener("DOMContentLoaded", function () {
     const container = document.getElementById('eventsheet-embed-widget');
+    
+    // Parameters
     const sheetID = container.getAttribute('sheet-id')
+    const embedCSS = container.getAttribute('enable-css')
+    const actionButtonText = container.getAttribute('action-button-text') || "Buy Tickets"
+    
+    // Variables
     const apiUrl = 'https://api.eventsheet.app/v1/events/public/sheet/' + sheetID;
-
+    
     // Styles
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://eventsheet.github.io/embed-events/style.css';
-    document.head.appendChild(link);
+    if (embedCSS === true) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://eventsheet.github.io/embed-events/style.css';
+        document.head.appendChild(link);
+        console.log("fetching remote CSS: https://eventsheet.github.io/embed-events/style.css")
+    } else {
+        console.log("skipping embedding remote CSS")
+    }
     
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            if (data["tour_name"] !== null || data["tour_name"] !== "") {
+                const tourHeader = document.createElement('h1')
+                tourHeader.textContent = data["tour_name"]
+                container.appendChild(tourHeader);
+            }
 
-            const tourHeader = document.createElement('h1')
-            tourHeader.textContent = data["tour_name"]
-            container.appendChild(tourHeader);
+            if (data["artist_name"] !== null || data["artist_name"] !== "") {
+                const artistHeader = document.createElement('h2')
+                artistHeader.textContent = data["artist_name"]
+                container.appendChild(artistHeader);
+            }
 
-            const artistHeader = document.createElement('h2')
-            artistHeader.textContent = data["artist_name"]
-            container.appendChild(artistHeader);
-
+            // Core list container
             const list = document.createElement('ul')
             data.events.forEach(item => {
-                console.log(item)
-
+                // Event Container
                 const eventContainer = document.createElement('div')
                 eventContainer.className = "event"
 
@@ -80,14 +93,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 eventLocationCityState.classList.add("city", "state")
                 eventLocationCityState.textContent = item.location.city_name + ", " + item.location.state_name
                 eventGeneralDetails.appendChild(eventLocationCityState)
-
-
                 eventContainer.appendChild(eventGeneralDetails)
 
                 // Event Ticket Button
                 var ticketLink = document.createElement('a');
                 ticketLink.href = item.link;
-                ticketLink.textContent = 'Buy Tickets';
+                ticketLink.textContent = actionButtonText;
                 ticketLink.className = 'tickets';
                 ticketLink.target = '_blank';
                 eventContainer.appendChild(ticketLink);

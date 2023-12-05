@@ -8,6 +8,10 @@
     border-radius: 0.5em;
 }
 
+#eventsheet-embed-widget h1,h2,h3,h4 {
+    margin: 0;
+}
+
 #eventsheet-embed-widget ul {
     list-style: none;
     padding: 0;
